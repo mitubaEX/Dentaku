@@ -1,11 +1,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "test/version"
+require "dentaku/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "test"
-  spec.version       = Test::VERSION
+  spec.name          = "dentaku"
+  spec.version       = Dentaku::VERSION
   spec.authors       = ["mitubaEX"]
   spec.email         = ["g1344955@cse.kyoto-su.ac.jp"]
 

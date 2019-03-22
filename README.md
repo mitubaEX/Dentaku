@@ -1,15 +1,11 @@
-# Test
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/test`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+# Dentaku
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'test'
+gem 'dentaku'
 ```
 
 And then execute:
@@ -18,11 +14,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install test
+    $ gem install dentaku
 
 ## Usage
 
-TODO: Write usage instructions here
+
 
 ## Development
 

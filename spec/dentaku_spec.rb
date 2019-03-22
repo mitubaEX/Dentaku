@@ -1,8 +1,8 @@
-RSpec.describe Test do
+RSpec.describe Dentaku do
 
   describe 'input number' do
     before(:each) do
-      @result = Test::Calculator.new(params).eval
+      @result = Dentaku::Calculator.new(params).eval
     end
 
     context 'when input single number' do

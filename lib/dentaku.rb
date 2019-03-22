@@ -1,7 +1,7 @@
-require "test/version"
-require "test/cli" # ここ追加
+require "dentaku/version"
+require "dentaku/cli" # ここ追加
 
-module Test
+module Dentaku
   class Error < StandardError; end
   # Your code goes here...
   class Calculator
