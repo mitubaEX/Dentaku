@@ -61,6 +61,23 @@ RSpec.describe Test do
           expect(@result).to eq(6)
         end
       end
+
+      context 'with multiple number' do
+        let(:params) { '1 + 2 + 3 + 4 + 5 +        6 + 7 + 8 + 9 + 10' }
+        it 'multiple number' do
+          expect(@result).to eq(55)
+        end
+      end
     end
+
+    context 'when input multiple expression with multi operator' do
+      context 'with multiple operator' do
+        let(:params) { '1 - 2 * 3 / 4' }
+        it 'multiple number' do
+          expect(@result).to eq(0)
+        end
+      end
+    end
+
   end
 end

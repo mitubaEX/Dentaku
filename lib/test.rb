@@ -12,52 +12,58 @@ module Test
     end
 
     def eval
-      value = 0
-      while @current_index != @words.length do
+      value = self.eval_term
+
+      skip_whitespace
+      current_word = @words[@current_index]
+      while current_word == '+' || current_word == '-' do
         skip_whitespace
         current_word = @words[@current_index]
 
-        if is_digit?(current_word)
-          value = parse_digit
-
-        elsif is_plus?(current_word)
+        case current_word
+        when '+'
           @current_index += 1
-          value = value + self.eval
-
-        elsif is_minus?(current_word)
+          value += self.eval_term
+        when '-'
           @current_index += 1
-          value = value - self.eval
-
-        elsif is_multi?(current_word)
-          @current_index += 1
-          value = value * self.eval
-
-        elsif is_div?(current_word)
-          @current_index += 1
-          value = value / self.eval
-
-        elsif is_mod?(current_word)
-          @current_index += 1
-          value = value % self.eval
+          value -= self.eval_term
         end
       end
       value
     end
 
-    def is_plus?(word)
-      word == '+'
+    def eval_term
+      value = self.eval_fact
+
+      skip_whitespace
+      current_word = @words[@current_index]
+      while current_word == '*' || current_word == '/' || current_word == '/' do
+        skip_whitespace
+        current_word = @words[@current_index]
+
+        case current_word
+        when '*'
+          @current_index += 1
+          value *= self.eval_fact
+        when '/'
+          @current_index += 1
+          value /= self.eval_fact
+        when '%'
+          @current_index += 1
+          value %= self.eval_fact
+        end
+      end
+      value
     end
-    def is_minus?(word)
-      word == '-'
-    end
-    def is_multi?(word)
-      word == '*'
-    end
-    def is_div?(word)
-      word == '/'
-    end
-    def is_mod?(word)
-      word == '%'
+
+    def eval_fact
+      skip_whitespace
+      current_word = @words[@current_index]
+
+      if is_digit?(current_word)
+        parse_digit
+      end
+
     end
 
     def parse_digit
