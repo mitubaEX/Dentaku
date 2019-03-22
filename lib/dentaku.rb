@@ -7,7 +7,7 @@ module Dentaku
   # Your code goes here...
   class Dentaku
     def perform(word)
-      Evaluator.new(word).eval_expr
+      Evaluator.new(word).eval
     end
   end
 end

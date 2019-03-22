@@ -88,5 +88,13 @@ RSpec.describe Dentaku do
       end
     end
 
+    context 'when input function' do
+      context 'with single function' do
+        let(:params) { 'def f(){ 1 } f' }
+        it 'single function' do
+          expect(@result).to eq(1)
+        end
+      end
+    end
   end
 end
