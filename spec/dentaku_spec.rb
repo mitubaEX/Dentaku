@@ -2,7 +2,7 @@ RSpec.describe Dentaku do
 
   describe 'input number' do
     before(:each) do
-      @result = Dentaku::Calculator.new(params).eval_expr
+      @result = Dentaku::Dentaku.new.perform(params)
     end
 
     context 'when input single number' do
