@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'test'
+
+Test::CLI.start # ここ追加
