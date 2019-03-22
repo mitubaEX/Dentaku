@@ -90,11 +90,40 @@ RSpec.describe Dentaku do
 
     context 'when input function' do
       context 'with single function' do
-        let(:params) { 'def f(){ 1 } f' }
+        let(:params) { 'def f(){ 1 } f()' }
         it 'single function' do
           expect(@result).to eq(1)
         end
       end
+
+      context 'with single function' do
+        let(:params) { 'def f(a){ a } f(1)' }
+        it 'single function with args' do
+          expect(@result).to eq(1)
+        end
+      end
+
+      context 'with single function with expression args' do
+        let(:params) { 'def f(a){ a } f(1 + 2)' }
+        it 'single function with args' do
+          expect(@result).to eq(3)
+        end
+      end
+
+      context 'with single function with recursive' do
+        let(:params) { 'def f(a){ a + 1 } f(1 + 2)' }
+        it 'single function with args' do
+          expect(@result).to eq(4)
+        end
+      end
+
+      context 'with single function with recursive' do
+        let(:params) { 'def f(a){ a * 2 } f(f(f(1 + 2)))' }
+        it 'single function with args' do
+          expect(@result).to eq(24)
+        end
+      end
+
     end
   end
 end

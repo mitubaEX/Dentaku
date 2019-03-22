@@ -5,16 +5,19 @@ module Dentaku
     def initialize(word)
       @words = word.split("")
       @current_index = 0
-      @func_args = {}
+      @func_args = 0
       @func_bodies = {}
     end
 
     def eval
       skip_whitespace
+
       eval_func
 
       skip_whitespace
       current_word = @words[@current_index]
+
+      # expr
       if is_digit?(current_word) || is_rparen?(current_word)
         return eval_expr
       end
@@ -22,6 +25,7 @@ module Dentaku
       eval_call_func
     end
 
+    # parse func
     def eval_func
       skip_whitespace
 
@@ -31,7 +35,7 @@ module Dentaku
         skip_whitespace
 
         func_name = parse_letters
-        @func_args[func_name] = parse_func_args
+        @func_args = parse_func_args
         @func_bodies[func_name] = parse_func_body
       end
 
@@ -42,7 +46,25 @@ module Dentaku
 
       if is_letter?(@words[@current_index])
         func_name = parse_letters
-        return @func_bodies[func_name]
+        skip_LorR_paren_brace
+
+        body = @func_bodies[func_name]
+
+
+        value = 0
+        if is_letter?(@words[@current_index])
+          value = eval_call_func
+        else
+          value = eval_expr
+        end
+
+        skip_LorR_paren_brace
+
+        if body.include? 'a'
+          return Evaluator.new(body.gsub('a', value.to_s)).eval_expr
+        end
+
+        return body.to_i
       end
     end
 
@@ -56,31 +78,34 @@ module Dentaku
     end
 
     def parse_func_args
-      skip_whitespace
-      @current_index += 1
-      skip_whitespace
+      skip_LorR_paren_brace
 
-      value = eval_expr
+      parse_letters
 
-      skip_whitespace
-      @current_index += 1
-      skip_whitespace
+      skip_LorR_paren_brace
 
-      value
+      0
     end
 
     def parse_func_body
+      skip_LorR_paren_brace
+
+      str = ''
+      while @words[@current_index] != '}'
+        str += @words[@current_index]
+        @current_index += 1
+        skip_whitespace
+      end
+
+      skip_LorR_paren_brace
+
+      str
+    end
+
+    def skip_LorR_paren_brace
       skip_whitespace
       @current_index += 1
       skip_whitespace
-
-      value = eval_expr
-
-      skip_whitespace
-      @current_index += 1
-      skip_whitespace
-
-      value
     end
 
     def is_letter?(word)
@@ -96,6 +121,7 @@ module Dentaku
       false
     end
 
+    # parse expr
     def eval_expr
       value = self.eval_term
 
