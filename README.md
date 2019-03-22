@@ -7,7 +7,7 @@ simple calculator
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "dentaku", :git => "https://github.com/mitubaEX/Dentaku.git" # URI は適宜書き換えてください
+gem "dentaku", :git => "https://github.com/mitubaEX/Dentaku.git"
 ```
 
 And then execute:
