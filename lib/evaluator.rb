@@ -11,6 +11,19 @@ module Dentaku
 
     def eval
       skip_whitespace
+      eval_func
+
+      skip_whitespace
+      current_word = @words[@current_index]
+      if is_digit?(current_word) || is_rparen?(current_word)
+        return eval_expr
+      end
+
+      eval_call_func
+    end
+
+    def eval_func
+      skip_whitespace
 
       if is_def?
         # slide 'def' string
@@ -22,8 +35,6 @@ module Dentaku
         @func_bodies[func_name] = parse_func_body
       end
 
-      puts eval_expr
-      eval_call_func
     end
 
     def eval_call_func
@@ -137,7 +148,7 @@ module Dentaku
       value = 0
       if is_digit?(current_word)
         value = parse_digit
-      elsif is_rparen(current_word)
+      elsif is_rparen?(current_word)
         @current_index += 1
         value = eval_expr
         @current_index += 1
@@ -145,7 +156,7 @@ module Dentaku
       value
     end
 
-    def is_rparen(word)
+    def is_rparen?(word)
       word == '('
     end
 
