@@ -2,7 +2,7 @@ RSpec.describe Dentaku do
 
   describe 'input number' do
     before(:each) do
-      @result = Dentaku::Calculator.new(params).eval
+      @result = Dentaku::Calculator.new(params).eval_expr
     end
 
     context 'when input single number' do
@@ -72,9 +72,18 @@ RSpec.describe Dentaku do
 
     context 'when input multiple expression with multi operator' do
       context 'with multiple operator' do
-        let(:params) { '1 - 2 * 3 / 4' }
+        let(:params) { '20 - 2 * 3 / 4 % 2' }
         it 'multiple number' do
-          expect(@result).to eq(0)
+          expect(@result).to eq(19)
+        end
+      end
+    end
+
+    context 'when input multiple expression with paren' do
+      context 'with multiple operator with paren' do
+        let(:params) { '(20 - 2) * 3 / 4 % 2' }
+        it 'multiple number' do
+          expect(@result).to eq(1)
         end
       end
     end

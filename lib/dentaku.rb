@@ -11,7 +11,7 @@ module Dentaku
       @previous_index = 0
     end
 
-    def eval
+    def eval_expr
       value = self.eval_term
 
       skip_whitespace
@@ -60,10 +60,19 @@ module Dentaku
       skip_whitespace
       current_word = @words[@current_index]
 
+      value = 0
       if is_digit?(current_word)
-        parse_digit
+        value = parse_digit
+      elsif is_rparen(current_word)
+        @current_index += 1
+        value = eval_expr
+        @current_index += 1
       end
+      value
+    end
 
+    def is_rparen(word)
+      word == '('
     end
 
     def parse_digit
