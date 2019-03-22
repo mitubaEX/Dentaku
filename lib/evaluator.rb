@@ -9,6 +9,7 @@ module Dentaku
       @func_bodies = {}
     end
 
+    # main
     def eval
       skip_whitespace
 
@@ -22,6 +23,7 @@ module Dentaku
         return eval_expr
       end
 
+      # function
       eval_call_func
     end
 
@@ -68,15 +70,6 @@ module Dentaku
       end
     end
 
-    def parse_letters
-      str = ''
-      while is_letter?(@words[@current_index]) do
-        str += @words[@current_index]
-        @current_index += 1
-      end
-      str
-    end
-
     def parse_func_args
       skip_LorR_paren_brace
 
@@ -100,16 +93,6 @@ module Dentaku
       skip_LorR_paren_brace
 
       str
-    end
-
-    def skip_LorR_paren_brace
-      skip_whitespace
-      @current_index += 1
-      skip_whitespace
-    end
-
-    def is_letter?(word)
-      (word =~ /^[a-zA-Z]$/) == 0
     end
 
     def is_def?
@@ -180,6 +163,26 @@ module Dentaku
         @current_index += 1
       end
       value
+    end
+
+    # util method
+    def parse_letters
+      str = ''
+      while is_letter?(@words[@current_index]) do
+        str += @words[@current_index]
+        @current_index += 1
+      end
+      str
+    end
+
+    def skip_LorR_paren_brace
+      skip_whitespace
+      @current_index += 1
+      skip_whitespace
+    end
+
+    def is_letter?(word)
+      (word =~ /^[a-zA-Z]$/) == 0
     end
 
     def is_rparen?(word)

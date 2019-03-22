@@ -123,7 +123,6 @@ RSpec.describe Dentaku do
           expect(@result).to eq(24)
         end
       end
-
     end
   end
 end

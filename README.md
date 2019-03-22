@@ -1,24 +1,35 @@
 # Dentaku
 
+simple calculator
+
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'dentaku'
+gem "dentaku", :git => "https://github.com/mitubaEX/Dentaku.git" # URI は適宜書き換えてください
 ```
 
 And then execute:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install dentaku
+    $ bundle install
 
 ## Usage
 
-
+```
+$ bundle ex bin/dentaku dentaku '20 - 2 * 3 / 4 % 2'
+19
+$ bundle ex bin/dentaku dentaku '(20 - 2) * 3 / 4 % 2'
+1
+$ bundle ex bin/dentaku dentaku 'def f(){ 1 } f()'
+1
+$ bundle ex bin/dentaku dentaku 'def f(){ 1 } f()'
+1
+$ bundle ex bin/dentaku dentaku 'def f(a){ a + 1 } f(1 + 2)'
+4
+$ bundle ex bin/dentaku dentaku 'def f(a){ a * 2 } f(f(f(1 + 2)))'
+24
+```
 
 ## Development
 
